@@ -16,11 +16,8 @@ from gpio_func import get_distance_boolean, trigger_door
 @login_required
 def index():
     if FOR_RASP:
-        print("User here")
 
         distance, open_boolean = get_distance_boolean()
-
-        print("Distance" + distance)
 
         if (distance >= 300) or (distance <= 2):
             flash('Atualiza a pagina por favor')
@@ -68,15 +65,15 @@ def login():
     registered_user = User.query.filter_by(username=username).first()
     print(registered_user)
     if registered_user is None:
-        print("username invalid")
+        print("username invalid: " + username)
         flash('Username is invalid', 'error')
         return redirect(url_for('login'))
     if not registered_user.check_password(password):
-        print("password invalid")
+        print("password invalid: " + password)
         flash('Password is invalid', 'error')
         return redirect(url_for('login'))
     login_user(registered_user)
-    print("Valid")
+    print("Valid " + username)
     flash('Logged in successfully')
     return redirect(request.args.get('next') or url_for('index'))
 
