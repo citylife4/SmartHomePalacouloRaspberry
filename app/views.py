@@ -5,6 +5,8 @@ from forms import LoginForm
 from flask import Flask, request, flash, url_for, redirect, render_template, g
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 
+from config import FOR_RASP
+
 from gpio_func import get_distance_boolean, trigger_door
 
 
@@ -12,15 +14,22 @@ from gpio_func import get_distance_boolean, trigger_door
 @login_required
 def index():
 
-    distance, open_boolean = get_distance_boolean()
+    if FOR_RASP:
+        distance, open_boolean = get_distance_boolean()
 
-    if (distance >= 300) or (distance <= 2):
-	flash('Atualiza a pagina por favor')
+        if (distance >= 300) or (distance <= 2):
+            flash('Atualiza a pagina por favor')
 
-    send_data = {
-        'open': open_boolean,
-        'distance': distance
-    }
+        send_data = {
+            'open': open_boolean,
+            'distance': distance
+        }
+    else:
+        send_data = {
+            'open': True,
+            'distance': 'DEBUG'
+        }
+
     return render_template('portao.html', **send_data)
 
 

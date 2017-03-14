@@ -1,4 +1,8 @@
-import RPi.GPIO as GPIO  # Import GPIO library
+from config import FOR_RASP
+
+if FOR_RASP:
+    import RPi.GPIO as GPIO  # Import GPIO library
+
 import time  # Import time library
 import math
 
@@ -54,6 +58,8 @@ def get_distance_boolean(sample_size=11, sample_wait=0.1, distance_to_door=10):
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(trig_pin, GPIO.OUT)
     GPIO.setup(echo_pin, GPIO.IN)
+    sonar_signal_on = -1
+    sonar_signal_off = -1
 
     for distance_reading in range(sample_size):
 
@@ -72,6 +78,9 @@ def get_distance_boolean(sample_size=11, sample_wait=0.1, distance_to_door=10):
                 raise SystemError('Echo pulse was not received')
         while GPIO.input(echo_pin) == 1:
             sonar_signal_on = time.time()
+
+        if sonar_signal_on == -1 or sonar_signal_off == -1:
+            raise SystemError('Sonar_signal is wrong')
 
         time_passed = sonar_signal_on - sonar_signal_off
         distance_cm = time_passed * ((speed_of_sound * 100) / 2)
