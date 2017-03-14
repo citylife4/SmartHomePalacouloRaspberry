@@ -16,7 +16,7 @@ from gpio_func import get_distance_boolean, trigger_door
 @login_required
 def index():
     if FOR_RASP:
-        print("ola")
+        print("oi")
         try:
             distance, open_boolean = get_distance_boolean()
         except:
