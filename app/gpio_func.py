@@ -58,8 +58,6 @@ def get_distance_boolean(sample_size=11, sample_wait=0.1, distance_to_door=10):
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(trig_pin, GPIO.OUT)
     GPIO.setup(echo_pin, GPIO.IN)
-    sonar_signal_on = -1
-    sonar_signal_off = -1
 
     for distance_reading in range(sample_size):
 

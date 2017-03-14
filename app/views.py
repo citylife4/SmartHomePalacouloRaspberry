@@ -16,11 +16,11 @@ from gpio_func import get_distance_boolean, trigger_door
 @login_required
 def index():
     if FOR_RASP:
-        print("oi")
-        try:
-            distance, open_boolean = get_distance_boolean()
-        except:
-            print(sys.exc_info()[0])
+        print("User here")
+
+        distance, open_boolean = get_distance_boolean()
+
+        print("Distance" + distance)
 
         if (distance >= 300) or (distance <= 2):
             flash('Atualiza a pagina por favor')
@@ -55,9 +55,7 @@ def changeportao():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    print 'ola'
     form = LoginForm()
-    print 'oi'
     if request.method == 'GET':
         return render_template('LoginForm.html', form=form)
 
@@ -70,11 +68,11 @@ def login():
     registered_user = User.query.filter_by(username=username).first()
     print(registered_user)
     if registered_user is None:
-        print 'username invalid'
+        print("username invalid")
         flash('Username is invalid', 'error')
         return redirect(url_for('login'))
     if not registered_user.check_password(password):
-        print 'password invalid'
+        print("password invalid")
         flash('Password is invalid', 'error')
         return redirect(url_for('login'))
     login_user(registered_user)
