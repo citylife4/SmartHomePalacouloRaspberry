@@ -56,6 +56,23 @@
             -->
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+
+            {% with messages = get_flashed_messages() %}
+
+                {% if messages %}
+                    <div class="col-md-1" style="margin-left:20%">
+                        <ul class=flashes>
+
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endwith %}
+            {% block body %}{% endblock %}
+
     </form>
 
 </div> <!-- /container -->
