@@ -1,10 +1,11 @@
 from config import FOR_RASP
+import time  # Import time library
+import math
 
 if FOR_RASP:
     import RPi.GPIO as GPIO  # Import GPIO library
 
-import time  # Import time library
-import math
+
 
 trig_pin = 23  # Associate pin 23 to TRIG
 echo_pin = 24  # Associate pin 24 to ECHO

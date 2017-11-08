@@ -1,14 +1,11 @@
 from config import basedir, FOR_RASP
-
-
 from flask import Flask
-
-
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
+
 if FOR_RASP:
-    from gpio_func import setup_gpio
+    from app.gpio_func import setup_gpio
 
 
 app = Flask(__name__)
@@ -26,3 +23,4 @@ bcrypt = Bcrypt(app)
 
 
 from app import views, models
+
