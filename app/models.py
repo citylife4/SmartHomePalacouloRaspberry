@@ -1,6 +1,7 @@
 from datetime import datetime
 
-from app import db
+from app import db, bcrypt
+
 
 class User(db.Model):
     __tablename__ = "users"
@@ -48,3 +49,15 @@ class User(db.Model):
         return '<User %r>' % self.username
 
 
+class Door(db.Model):
+    __tablename__ = "door"
+
+    id = db.Column('id', db.Integer, primary_key=True)
+    date = db.Column('date', db.String(20), db.DateTime, index=True)
+    door_status = db.Column('door', db.Boolean, unique=True)
+
+    def get_id(self):
+        try:
+            return unicode(self.id)  # python 2
+        except NameError:
+            return str(self.id)  # python 3

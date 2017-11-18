@@ -1,4 +1,4 @@
 import sys
-sys.path.insert(0, '/var/www/html/SmartHomePalacouloRaspberry/')
+sys.path.insert(0, '/home/jdv/Project/SmartHome_Webserver')
 
 from run import app as application
