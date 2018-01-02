@@ -1,0 +1,38 @@
+{% extends "main.html" %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Configurações</h1>
+
+            <div class="row placeholders">
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <ul>
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
+
+                    {% if open %}
+                        Porta está <span style="color: green; ">ABERTA</span> (<a href="/portao/trigger">Fechar</a>)
+                        <br>
+                        distance : {{ distance }}
+                    {% else %}
+                        Porta está <span style="color: red; ">FECHADA</span> (<a href="/portao/trigger">Abrir</a>)
+                        <br>
+                        distance : {{ distance }}
+                    {% endif %}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

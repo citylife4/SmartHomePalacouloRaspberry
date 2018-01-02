@@ -1,4 +1,4 @@
 import sys
-sys.path.insert(0, '/home/jdv/Project/SmartHome_Webserver')
+sys.path.insert(0, '/home/jdv/Project/SmartHome_Webserver/homedash')
 
-from run import app as application
+from main import dash_app as application
