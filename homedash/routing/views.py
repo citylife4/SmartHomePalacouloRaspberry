@@ -1,22 +1,22 @@
-from flask import request, flash, url_for, redirect, render_template, g
-from flask_login import login_user, logout_user, current_user, login_required
+from flask import flash, redirect, g
+from flask_login import current_user, login_required
 
 from homedash import login_manager, blueprint
-from homedash.models import User
+from homedash.Database.models import User
 
 
-@blueprint.route('/')
-@login_required
-def index():
-
-    send_data = {
-        'open': True,
-        'distance': 'DEBUG'
-    }
-
-    return render_template('portao.html', **send_data)
-
-
+#@blueprint.route('/dasboard/overview')
+#@login_required
+#def index():
+#
+#    send_data = {
+#        'open': True,
+#        'distance': 'DEBUG'
+#    }
+#
+#    return render_template('portao.html', **send_data)
+#
+#
 @blueprint.route("/portao/trigger")
 @login_required
 def changeportao():

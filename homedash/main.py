@@ -1,12 +1,18 @@
 #!flask/bin/python
 from flask import Flask, redirect, url_for
-import homedash
-
+import sys
 import os
+
+
+#print("fatal error: " , file=sys.stderr)
 
 dash_app = Flask(__name__)
 here = os.path.abspath(os.path.dirname(__file__))
-dash_app.config.from_object('config') #TODO Cahnge
+
+from homedash.config import Config
+dash_app.config.from_object(Config)
+
+import homedash
 homedash.bind(app=dash_app)
 
 
@@ -23,4 +29,5 @@ def main():
 
 if __name__ == '__main__':
     dash_app.run(debug=True, host='0.0.0.0')
+
 

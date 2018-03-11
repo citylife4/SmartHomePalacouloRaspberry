@@ -443,3 +443,11 @@ font-size: 19px;
     float: right;
     margin-left: 5px;
 }
+
+div#loading {
+    width: 35px;
+    height: 35px;
+    display: none;
+    background: url(/static/ajax-loader.gif) no-repeat;
+    cursor: wait;
+    }

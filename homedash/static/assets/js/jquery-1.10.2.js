@@ -9625,7 +9625,7 @@ if ( xhrSupported ) {
 						xhr = options.xhr(),
 						id = ++xhrId;
 
-					// Open the socket
+					// Open the socket_connection
 					xhr.open( options.type, options.url, options.async, options.username, options.password );
 
 					// Apply custom fields if provided

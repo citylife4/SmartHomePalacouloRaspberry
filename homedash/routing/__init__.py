@@ -5,6 +5,8 @@ from flask import redirect, url_for
 #Cenas
 import homedash.routing.login
 import homedash.routing.views
+import homedash.routing.settings
+import homedash.routing.dashboard
 
 # Provide a secret-key for using WTF-forms
 if dash_app.secret_key is None:
@@ -18,7 +20,7 @@ def static(filename):
 
 
 # All rules below are for viewing the homedash-pages
-#@blueprint.route('/')
-#def index():
-#    return redirect(url_for('homedash.overview'))
+@blueprint.route('/')
+def index():
+    return redirect(url_for('homedash.overview'))
 
