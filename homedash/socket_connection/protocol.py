@@ -1,12 +1,12 @@
-from concurrent.futures import thread
-
-import _thread
 from time import sleep
 
-from socket_connection import socket_connection
 import threading
 from homedash.socket_connection.socket_connection import send_socket
-from homedash.config import q
+import threading
+from time import sleep
+
+from homedash.socket_connection.socket_connection import send_socket
+
 
 def send_open():
     global q

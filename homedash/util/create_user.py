@@ -1,15 +1,12 @@
-import flask_bcrypt
-
-import os
 import sys
-import sqlite3
+
+import flask_bcrypt
 
 sys.path.insert(0, '/home/jdv/Project/SmartHome_Webserver/')
 sys.path.insert(0, '/home/jdv/Project/SmartHome_Webserver/homedash')
 
-import homedash
-from homedash import db, Data
-from homedash.Database.models import User
+from homedash import db
+from homedash.models import User
 
 name = 'jdv'
 password = 'V,kC[H9jY3E?+c[b'

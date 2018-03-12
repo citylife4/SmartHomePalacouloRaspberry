@@ -6,22 +6,22 @@
     <title>Palaçoulo Dashboard</title>
 
 
-    <link rel="shortcut icon" href="{{ url_for('homedash.static', filename='assets/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/favicon.ico') }}">
     <!-- Bootstrap Styles-->
-    <link rel="stylesheet" href="{{ url_for('homedash.static', filename='assets/css/bootstrap.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.css') }}"/>
     <!-- FontAwesome Styles-->
-    <link rel="stylesheet" href="{{ url_for('homedash.static', filename='assets/css/font-awesome.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome.css') }}"/>
     <!-- Custom Styles-->
-    <link rel="stylesheet" href="{{ url_for('homedash.static', filename='assets/css/custom-styles.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/custom-styles.css') }}"/>
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
 
     <!-- Other-->
-    <!--[if lte IE 8]> <script src="{{ url_for('homedash.static', filename='assets/js/ie/html5shiv.js') }}"></script>  <![endif]-->
-    <!--[if lte IE 9]><link rel="stylesheet" href="{{ url_for('homedash.static', filename='assets/css/ie9.css') }}" />  <![endif]-->
-    <!--[if lte IE 8]><link rel="stylesheet" href="{{ url_for('homedash.static', filename='assets/css/ie8.css') }}" />  <![endif]-->
-    <script src="{{ url_for('homedash.static', filename='assets/js/sort.js') }}"></script>
-    <script src="{{ url_for('homedash.static', filename='assets/js/jquery.min.js') }}"></script>
+    <!--[if lte IE 8]> <script src="{{ url_for('static', filename='assets/js/ie/html5shiv.js') }}"></script>  <![endif]-->
+    <!--[if lte IE 9]><link rel="stylesheet" href="{{ url_for('static', filename='assets/css/ie9.css') }}" />  <![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="{{ url_for('static', filename='assets/css/ie8.css') }}" />  <![endif]-->
+    <script src="{{ url_for('static', filename='assets/js/sort.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
 
 </head>
 <body>
@@ -34,7 +34,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url_for('homedash.index') }}">Dashboard </a>
+            <a class="navbar-brand" href="{{ url_for('homedash.overview') }}">Dashboard </a>
         </div>
         <h4 class="navbar-text"></h4>
         <ul class="nav navbar-top-links navbar-right">
@@ -47,7 +47,7 @@
                     <li><a href="{{ url_for('homedash.settings') }}"><i class="fa fa-gear fa-fw"></i> Settings</a>
                      </li>
                     <li class="divider"></li>
-                    <li><a href="{{ url_for('homedash.logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="{{ url_for('auth.logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -93,17 +93,17 @@
 
 <!-- JS Scripts-->
 <!-- jQuery Js -->
-<script src="{{ url_for('homedash.static', filename='assets/js/jquery-1.10.2.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/jquery-1.10.2.js') }}"></script>
 <!-- Bootstrap Js -->
-<script src="{{ url_for('homedash.static', filename='assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/bootstrap.min.js') }}"></script>
 <!-- Metis Menu Js -->
-<script src="{{ url_for('homedash.static', filename='assets/js/jquery.metisMenu.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/jquery.metisMenu.js') }}"></script>
 <!-- Custom Js -->
-<script src="{{ url_for('homedash.static', filename='assets/js/custom-scripts.js') }}"></script>
-<script src="{{ url_for('homedash.static', filename='assets/js/skel.min.js') }}"></script>
-<script src="{{ url_for('homedash.static', filename='assets/js/util.js') }}"></script>
-<!--[if lte IE 8]> <script src="{{ url_for('homedash.static', filename='assets/js/ie/respond.min.js') }}"></script> <![endif]-->
-<script src="{{ url_for('homedash.static', filename='assets/js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/custom-scripts.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/skel.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+<!--[if lte IE 8]> <script src="{{ url_for('static', filename='assets/js/ie/respond.min.js') }}"></script> <![endif]-->
+<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
 
 </body>
 
@@ -112,7 +112,7 @@ div#loading {
     width: 35px;
     height: 35px;
     display: none;
-    background: url({{ url_for('homedash.static', filename='assets/ajax-loader.gif') }}) no-repeat;
+    background: url({{ url_for('static', filename='assets/ajax-loader.gif') }}) no-repeat;
     cursor: wait;
     }
 </style>
