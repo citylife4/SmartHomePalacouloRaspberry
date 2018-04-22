@@ -19,6 +19,8 @@ class RegistrationForm(FlaskForm):
     password2 = PasswordField(
         _l('Repeat Password'), validators=[DataRequired(),
                                            EqualTo('password')])
+    admin = BooleanField(_l('Admin user'))
+
     submit = SubmitField(_l('Register'))
 
     def validate_username(self, username):
@@ -43,3 +45,4 @@ class ResetPasswordForm(FlaskForm):
         _l('Repeat Password'), validators=[DataRequired(),
                                            EqualTo('password')])
     submit = SubmitField(_l('Request Password Reset'))
+

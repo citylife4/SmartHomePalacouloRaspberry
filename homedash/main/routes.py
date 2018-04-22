@@ -29,11 +29,6 @@ def index():
     return redirect(url_for('homedash.overview'))
 
 
-@blueprint.route('/dasboard/settings', methods=['GET', 'POST'])
-@login_required
-def settings():
-    password = 'x' * len(Config.password)
-    return render_template('settings.html', link=Config.link, session=session, config=Config, pw=password)
 
 
 @blueprint.route('/', methods=['GET', 'POST'])

@@ -9,7 +9,7 @@ from homedash.auth.forms import LoginForm, RegistrationForm, \
     ResetPasswordRequestForm, ResetPasswordForm
 from homedash.models import User
 
-
+from flask_login import current_user, login_required
 #from homedash.auth.email import send_password_reset_email
 
 
@@ -87,3 +87,70 @@ def reset_password(token):
         flash(_('Your password has been reset.'))
         return redirect(url_for('auth.login'))
     return render_template('auth/reset_password.html', form=form)
+
+
+@blueprint.route('/dasboard/settings/index')
+@login_required
+def settings():
+    reset_form = ResetPasswordForm()
+    reg_form = RegistrationForm()
+    users = User.query.all()
+    return render_template('auth/Settings.html' , reset_form=reset_form,
+                           reg_form=reg_form , users=users)
+
+
+@blueprint.route('/dasboard/settings/new_user', methods=['POST'])
+@login_required
+def new_user():
+    reset_form = ResetPasswordForm()
+    reg_form = RegistrationForm()
+    users = User.query.all()
+
+    if reg_form.validate_on_submit():
+        print("elo")
+        user = User(username=reg_form.username.data, email=reg_form.email.data, admin=reg_form.admin.data)
+        user.set_password(reg_form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash(_('Congratulations, you are now a registered user!'))
+
+    # handle the register form
+    # render the same template to pass the error message
+    # or pass `form.errors` with `flash()` or `session` then redirect to /
+    return render_template('auth/Settings.html' , reset_form=reset_form,
+                           reg_form=reg_form , users=users)
+
+
+@blueprint.route('/dasboard/settings/change_pass', methods=['POST'])
+@login_required
+def change_pass():
+    reset_form = ResetPasswordForm()
+    reg_form = RegistrationForm()
+    users = User.query.all()
+
+    if reset_form.validate_on_submit():
+        print("ola")
+        current_user.set_password(reset_form.password.data)
+        db.session.commit()
+        flash(_('Your password has been reset.'))
+        return redirect(url_for('auth.settings'))
+
+    # handle the login form
+    # render the same template to pass the error message
+    # or pass `form.errors` with `flash()` or `session` then redirect to /
+    return render_template('auth/Settings.html', reset_form=reset_form,
+                       reg_form=reg_form, users=users)
+
+
+@blueprint.route('/dasboard/settings/delete_user/<token>', methods=['GET', 'POST'])
+@login_required
+def delete_user(token):
+    reset_form = ResetPasswordForm()
+    reg_form = RegistrationForm()
+    users = User.query.all()
+
+    User.query.filter_by(id=token).delete()
+    db.session.commit()
+
+    return render_template('auth/Settings.html', reset_form=reset_form,
+                       reg_form=reg_form, users=users)

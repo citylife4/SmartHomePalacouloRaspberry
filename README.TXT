@@ -15,3 +15,8 @@ u = models.User(username='admin', email='admin@admin.com', password= bcrypt.gene
 References:
     https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
     https://nathanpjones.com/2016/02/remote-debug-gpio-on-raspberry-pi/
+
+   TODO:
+   -Settings]
+
+   -Save door information

@@ -3,6 +3,7 @@ from homedash.models import User
 
 homedash_app = create_homedash_app()
 
+
 @homedash_app.shell_context_processor
 def make_shell_context():
     return {'db': db, 'User': User}

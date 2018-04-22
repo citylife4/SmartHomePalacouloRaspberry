@@ -12,14 +12,15 @@ class User(db.Model):
     registered_on = db.Column('registered_on', db.DATETIME)
     last_login_date = db.Column('last_login_date', db.DATETIME)
     logged_in_bol = db.Column('logged_in_bol', db.Boolean)
+    admin = db.Column('admin', db.Boolean)
 
-    def __init__(self, username, password, email):
+    def __init__(self, username , email,admin):
         self.username = username
-        self.password = password
         self.email = email
         self.registered_on = datetime.utcnow()
         self.last_login_date = datetime.utcnow()
         self.logged_in_bol = False
+        self.admin = admin
 
     @property
     def is_authenticated(self):
@@ -34,6 +35,10 @@ class User(db.Model):
     @property
     def is_annonymous(self):
         return False
+        # return true if annon, actual user return false
+
+    def is_admin(self):
+        return self.admin
         # return true if annon, actual user return false
 
     def change_login_in_status(self, bool):
@@ -53,10 +58,18 @@ class User(db.Model):
         # return check_password_hash(self.password, password)
         return bcrypt.check_password_hash(self.password, password)
 
+    def set_password(self, password):
+        self.password = bcrypt.generate_password_hash(password)
     # Todo : add possibility to admins to create and delete users on site
+
+
+    def verify_reset_password_token(self):
+        return User.query.get(self.id)
+
 
     def __repr__(self):
         return '<User %r>' % self.username
+
 
 
 class Door(db.Model):
@@ -89,6 +102,12 @@ class Data(object):
 
     def get_door_status(self):
         return self.door_status
+
+
+class PortoDoorStatus(db.Model):
+    id = db.Column('id', db.Integer, primary_key=True)
+    date = db.Column('date', db.DATETIME, index=True)
+    opened = db.Column('door_opened', db.Boolean)
 
 
 @login.user_loader
