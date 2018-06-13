@@ -1,4 +1,12 @@
-from wtforms import Form, StringField, PasswordField, validators
+from flask_wtf import FlaskForm, Form
+#from wtforms import Form, StringField, PasswordField, validators, SubmitField
+from wtforms import StringField, PasswordField, validators, SubmitField
+from wtforms import DateField
+from datetime import date
+
+from wtforms.validators import DataRequired, EqualTo, Email
+
+from homedash.models import User
 
 
 class LoginForm(Form):
@@ -16,9 +24,15 @@ class RegistrationForm(FlaskForm):
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
-            raise ValidationError('Please use a different username.')
+            print("TODO: ERROR")
+            #aise ValidationError('Please use a different username.')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
-            raise ValidationError('Please use a different email address.')
+            print("TODO: ERROR")
+            #raise ValidationError('Please use a different email address.')
+
+
+class DateForm(Form):
+    dt = DateField('Pick a Date', format="%m/%d/%Y")

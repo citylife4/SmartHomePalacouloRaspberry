@@ -6,8 +6,9 @@ from flask_login import login_required
 
 from config import Config
 from homedash import db
+from homedash.forms import DateForm
 from homedash.main import blueprint
-from homedash.models import Door
+from homedash.models import PortoDoorStatus, Door, count_all_door_status_tables, Pagination
 from homedash.socket_connection.protocol import send_open
 from flask_login import current_user, login_required
 
@@ -110,3 +111,26 @@ def change_garage_door():
     db.session.add(new_door_stuts)
     db.session.commit()
     return redirect(url_for('homedash.overview'))
+
+
+
+@blueprint.route('/dashboard/porto/', defaults={'page': 1})
+@blueprint.route('/dashboard/porto/page/<int:page>')
+@login_required
+def porto_overview(page):
+    form = DateForm()
+
+    if form.validate_on_submit():
+        return form.dt.data.strftime('%x')
+    door_status = PortoDoorStatus.query.all()
+    count = count_all_door_status_tables()
+
+    if not door_status and page != 1:
+        print("Problems")
+        #abort(404)
+        
+    pagination = Pagination(page, Config.PER_PAGE, count)
+    return render_template('porto_overview.html' ,
+                           form=form,
+                           pagination=pagination,
+                           door_table=door_status)

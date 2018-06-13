@@ -1,0 +1,11 @@
+
+<tr>
+    <td class="title">{{ door.id }}</td>
+     <td class="title">{{ door.date.year }}</td>
+    {% if not door.get_opened_status() %}
+            <td class="title">Controlled Remotely</td>
+      {% else %}
+            <td class="title">Door Belt</td>
+      {% endif %}
+
+</tr>

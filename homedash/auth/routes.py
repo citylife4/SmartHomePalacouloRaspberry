@@ -89,7 +89,7 @@ def reset_password(token):
     return render_template('auth/reset_password.html', form=form)
 
 
-@blueprint.route('/dasboard/settings/index')
+@blueprint.route('/dashboard/settings/index')
 @login_required
 def settings():
     reset_form = ResetPasswordForm()
@@ -99,7 +99,7 @@ def settings():
                            reg_form=reg_form , users=users)
 
 
-@blueprint.route('/dasboard/settings/new_user', methods=['POST'])
+@blueprint.route('/dashboard/settings/new_user', methods=['POST'])
 @login_required
 def new_user():
     reset_form = ResetPasswordForm()
@@ -121,7 +121,7 @@ def new_user():
                            reg_form=reg_form , users=users)
 
 
-@blueprint.route('/dasboard/settings/change_pass', methods=['POST'])
+@blueprint.route('/dashboard/settings/change_pass', methods=['POST'])
 @login_required
 def change_pass():
     reset_form = ResetPasswordForm()
@@ -142,7 +142,7 @@ def change_pass():
                        reg_form=reg_form, users=users)
 
 
-@blueprint.route('/dasboard/settings/delete_user/<token>', methods=['GET', 'POST'])
+@blueprint.route('/dashboard/settings/delete_user/<token>', methods=['GET', 'POST'])
 @login_required
 def delete_user(token):
     reset_form = ResetPasswordForm()
