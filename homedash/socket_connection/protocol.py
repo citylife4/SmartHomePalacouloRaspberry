@@ -12,9 +12,10 @@ def send_open():
     global q
     to_do = "open"
 
-    if q is not None:
+    if 'q' in globals():
         print(q.isAlive())
         while q.isAlive() :
+            print("Sleeping")
             sleep(5)
 
     download_thread = threading.Thread(target=send_socket, args=(to_do,) )

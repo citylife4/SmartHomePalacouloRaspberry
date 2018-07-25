@@ -20,6 +20,7 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     INTERNAL_SERVER = "127.0.0.1"
     INTERNAL_PORT = 54897
+    PER_PAGE = 20
 
 
 global q
