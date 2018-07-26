@@ -1,11 +1,13 @@
 
 <tr>
     <td class="title">{{ door.id }}</td>
-     <td class="title">{{ door.date.strftime("%Y-%m-%d %H:%M:%S") }}</td>
-        {% if not door.get_opened_status() %}
+     <td class="title">{{ door.date }}</td>
+    {% if door.get_opened_status() == 0 %}
             <td class="title">Controlado Remotamente</td>
-      {% else %}
+    {% elif door.get_opened_status() == 1 %}
             <td class="title">Campainha</td>
-      {% endif %}
+    {% elif door.get_opened_status() == 3 %}
+             <td class="title">Porta 3 andar Aberta</td>
+    {% endif %}
 
 </tr>
