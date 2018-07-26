@@ -1,26 +1,15 @@
 import socket
 from datetime import datetime
 
-from flask import url_for, redirect, render_template, session
-from flask_login import login_required
+from flask import url_for, redirect, render_template
 
 from config import Config
 from homedash import db
-from homedash.forms import DateForm
 from homedash.main import blueprint
-from homedash.models import PortoDoorStatus, Door, count_all_door_status_tables, Pagination
+from homedash.models import PortoDoorStatus, Door, count_all_door_status_tables, count_door_status_in_date
 from homedash.socket_connection.protocol import send_open
-from flask_login import current_user, login_required
-
-"""
-@blueprint.before_app_request
-def before_request():
-    if current_user.is_authenticated:
-        urrent_user.last_seen = datetime.utcnow()
-        db.session.commit()
-        g.search_form = SearchForm()
-    g.locale = str(get_locale())
-"""
+from homedash.main.forms import DateForm
+from flask_login import login_required
 
 
 @blueprint.route('/', methods=['GET', 'POST'])
@@ -28,8 +17,6 @@ def before_request():
 @login_required
 def index():
     return redirect(url_for('homedash.overview'))
-
-
 
 
 @blueprint.route('/', methods=['GET', 'POST'])
@@ -113,24 +100,34 @@ def change_garage_door():
     return redirect(url_for('homedash.overview'))
 
 
-
-@blueprint.route('/dashboard/porto/', defaults={'page': 1})
-@blueprint.route('/dashboard/porto/page/<int:page>')
+@blueprint.route('/dashboard/porto/date/', methods=['GET', 'POST'])
 @login_required
-def porto_overview(page):
+def porto_overview():
     form = DateForm()
 
+    submit_date = datetime.now().strftime('%x')
     if form.validate_on_submit():
-        return form.dt.data.strftime('%x')
+        submit_date = form.dt.data.strftime('%x')
+
     door_status = PortoDoorStatus.query.all()
     count = count_all_door_status_tables()
+    #count_date = count_door_status_in_date(form.dt)
 
-    if not door_status and page != 1:
+    value = 0
+    for row in door_status:
+        if row.date.strftime('%x') in submit_date:
+            value = 1
+
+    print(submit_date)
+    print(value)
+    #print(PortoDoorStatus.date.in_(datetime.now()))
+    if not door_status:
         print("Problems")
         #abort(404)
-        
-    pagination = Pagination(page, Config.PER_PAGE, count)
+
+    #pagination = Pagination(date, Config.PER_PAGE, count)
     return render_template('porto_overview.html' ,
                            form=form,
-                           pagination=pagination,
-                           door_table=door_status)
+                           submit_date=submit_date,
+                           door_table=door_status,
+                           value=value)

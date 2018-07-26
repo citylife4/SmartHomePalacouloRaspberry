@@ -5,18 +5,26 @@
     <div class="container-fluid">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{ _('Door') }}</h5>
-
-                    <form method="post" action="">
+                    <h5 class="card-title">{{ "Informação disponivel para data: " + submit_date }}</h5>
+                     {{ wtf.quick_form(form) }}
+                <!--
+                    <form method="post" action="{{ url_for('homedash.porto_overview') }}">
                         {{ form.hidden_tag() }}
                         {{ form.dt(class="date") }}
                         <button type="submit">Go</button>
                     </form>
+                    --->
                     <div class="table-responsive">
                         <table class="table table-striped table-sm">
-                            {% for door in door_table %}
-                                {% include '_porto_door_status.html' %}
-                            {% endfor %}
+                            {% if value == 1%}
+                                {% for door in door_table %}
+                                    {% if submit_date in door.date.strftime('%x') %}
+                                        {% include '_porto_door_status.html' %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <p>&mdash; Não há informações disponíveis para esta data -</p>
+                            {% endif %}
                         </table>
                     </div>
                 </div>

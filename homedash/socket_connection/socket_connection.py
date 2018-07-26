@@ -37,7 +37,7 @@ def send_socket(message):
     try:
         sock_send.sendall(message.encode('utf-8'))
         receive_data = sock_send.recv(1024).decode()
-        #logging.info('Received %s ' % data_door)
+        print('Received %s ' % receive_data)
     finally:
         sock_send.close()
         return receive_data

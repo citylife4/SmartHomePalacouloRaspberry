@@ -121,6 +121,10 @@ def count_all_door_status_tables():
     return PortoDoorStatus.query.count()
 
 
+def count_door_status_in_date(dates):
+    return PortoDoorStatus.query.filter(PortoDoorStatus.date.strftime('%x') == dates).count()
+
+
 class Pagination(object):
 
     def __init__(self, page, per_page, total_count):
