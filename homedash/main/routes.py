@@ -1,12 +1,12 @@
 import socket
 from datetime import datetime
 
-from flask import url_for, redirect, render_template
+from flask import url_for, redirect, render_template, request
 
 from config import Config
 from homedash import db
 from homedash.main import blueprint
-from homedash.models import PortoDoorStatus, Door, count_all_door_status_tables, count_door_status_in_date
+from homedash.models import PortoDoorStatus, PalacouloDoorStatus, count_all_door_status_tables, count_door_status_in_date
 from homedash.socket_connection.protocol import send_open
 from homedash.main.forms import DateForm
 from flask_login import login_required
@@ -23,23 +23,8 @@ def index():
 @blueprint.route('/dashboard/overview')
 @login_required
 def overview():
-    door = Door.query.order_by(Door.id.desc()).first()
-
-    door_status = door.door_status
-    door_motion = door.door_motion
-
-    if door_motion:
-        if door_status:
-            status=0
-        else:
-            status=1
-    else:
-        if door_status:
-            status=2
-        else:
-            status=3
-
-    return render_template('dashboard.html', status=status, curr=1)
+    door = PalacouloDoorStatus.query.order_by(PalacouloDoorStatus.id.desc()).first()
+    return render_template('dashboard.html', status=door.door_status, curr=1)
 
 
 @blueprint.route('/dashboard/history')
@@ -66,69 +51,57 @@ def open_porto_door():
 @blueprint.route('/dashboard/control/garagedoor')
 @login_required
 def change_garage_door():
-    door = Door.query.order_by(Door.id.desc()).first()
-
+    door = PalacouloDoorStatus.query.order_by(PalacouloDoorStatus.id.desc()).first()
+    DEBUG = 1
     door_status = door.door_status
-    door_motion = door.door_motion
-    print(door_status)
-    print(door_motion)
 
-    if door_motion:
-        if door_status:
-            print("Still opening")
-            to_do = True
-            debug = False
-        else:
-            print("Still closing")
-            to_do = False
-            debug = False
-    else:
-        if door_status:
-            print("Closing")
-            send_open()
-            to_do = True #chegned
-            debug = True
-        else:
-            print("Opening")
-            send_open()
-            to_do = False #cehgne
-            debug = True
+    if door_status is 0:
+        print("Opening")
+        send_open()
+    elif door_status is 1:
+        print("Still Opening")
+    elif door_status is 2:
+        print("Closing")
+        send_open()
+    elif door_status is 3:
+        print("Still closing")
 
-    new_door_stuts = Door(date=datetime.now(), door_status=to_do, door_motion=debug)
+    if DEBUG:
+        door_status += 1
+        if door_status == 4:
+            door_status = 0
+
+    new_door_stuts = PalacouloDoorStatus(date=datetime.now(), door_status=door_status)
     db.session.add(new_door_stuts)
     db.session.commit()
     return redirect(url_for('homedash.overview'))
 
 
-@blueprint.route('/dashboard/porto/date/', methods=['GET', 'POST'])
+@blueprint.route('/dashboard/<location>/date/', methods=['GET', 'POST'])
 @login_required
-def porto_overview():
+def porto_overview(location):
+
     form = DateForm()
-
-    submit_date = datetime.now().strftime('%x')
-    if form.validate_on_submit():
-        submit_date = form.dt.data.strftime('%x')
-
-    door_status = PortoDoorStatus.query.all()
-    count = count_all_door_status_tables()
-    #count_date = count_door_status_in_date(form.dt)
-
     value = 0
+
+    submit_date = form.dt.data.strftime('%x') if form.validate_on_submit() else datetime.now().strftime('%x')
+    door_status = PalacouloDoorStatus.query.all() if "palacoulo" in location else PortoDoorStatus.query.all()
+
     for row in door_status:
         if row.date.strftime('%x') in submit_date:
-            print(row.get_opened_status())
             value = 1
 
     print(submit_date)
-    print(value)
+    print(location)
+    print(door_status)
 
-    #print(PortoDoorStatus.date.in_(datetime.now()))
     if not door_status:
         print("Problems")
         #abort(404)
 
     #pagination = Pagination(date, Config.PER_PAGE, count)
-    return render_template('porto_overview.html' ,
+    return render_template('table_date_overview.html' ,
+                           type=location,
                            form=form,
                            submit_date=submit_date,
                            door_table=door_status,

@@ -72,13 +72,12 @@ class User(db.Model):
 
 
 
-class Door(db.Model):
-    __tablename__ = "door"
+class PalacouloDoorStatus(db.Model):
+    __tablename__ = "door_palacoulo"
 
     id = db.Column('id', db.Integer, primary_key=True)
     date = db.Column('date', db.DATETIME, index=True)
-    door_status = db.Column('door_status', db.Boolean)
-    door_motion = db.Column('door_motion', db.Boolean)
+    door_status = db.Column('door_status', db.INT)
 
     def get_door_status(self):
         return self.door_status
@@ -107,11 +106,11 @@ class Data(object):
 class PortoDoorStatus(db.Model):
     id = db.Column('id', db.Integer, primary_key=True)
     date = db.Column('date', db.DATETIME, index=True)
-    opened = db.Column('door_opened', db.Boolean)
-    status = db.Column('door_status', db.INT)
+    opened = db.Column('door_status', db.INT)
 
     def get_opened_status(self):
-        return self.status
+        return self.opened
+
 
 @login.user_loader
 def load_user(id):

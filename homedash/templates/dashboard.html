@@ -10,17 +10,17 @@
                 </div>
                     <div class="card-body">
                         {% if status == 0 %}
-                            <p> Porta está <span style="color: orange; ">A Fechar</span>  </p>
+                            <p> Porta está <span style="color: red; ">Fachada</span>  </p>
                             <a href={{ url_for('homedash.change_garage_door') }} class="btn btn-primary" >Abrir</a>
                         {% elif status == 1 %}
                             <p> Porta está <span style="color: orange; ">A Abrir</span> </p>
                             <a href={{ url_for('homedash.change_garage_door') }} class="btn btn-primary" >Fechar</a>
                             <p> distance : {{ distance }}</p>
                         {% elif status == 2 %}
-                            <p> Porta está <span style="color: red; ">Fechada</span> </p>
+                            <p> Porta está <span style="color: green; ">Aberta</span> </p>
                             <a href={{ url_for('homedash.change_garage_door') }} class="btn btn-primary" >Fechar</a>
                         {% elif status == 3 %}
-                            <p> Porta está <span style="color: green; ">Aberta</span> </p>
+                            <p> Porta está <span style="color: orange; ">A fechar</span> </p>
                             <a href={{ url_for('homedash.change_garage_door') }} class="btn btn-primary" >Abrir</a>
                         {% endif %}
                     </div>

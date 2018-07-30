@@ -4,10 +4,10 @@
      <td class="title">{{ door.date }}</td>
     {% if door.get_opened_status() == 0 %}
             <td class="title">Controlado Remotamente</td>
-      {% elif door.get_opened_status() == 1 %}
+    {% elif door.get_opened_status() == 1 %}
             <td class="title">Campainha</td>
-        {% elif door.get_opened_status() == 3 %}
+    {% elif door.get_opened_status() == 3 %}
              <td class="title">Porta 3 andar Aberta</td>
-      {% endif %}
+    {% endif %}
 
 </tr>
