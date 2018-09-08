@@ -82,6 +82,12 @@ class PalacouloDoorStatus(db.Model):
     def get_door_status(self):
         return self.door_status
 
+    def get_date_hour(self):
+        return self.date.strftime("%x %X")
+
+    def get_hour(self):
+        return self.date.strftime("%X")
+
     def get_id(self):
         try:
             return unicode(self.id)  # python 2
@@ -111,6 +117,11 @@ class PortoDoorStatus(db.Model):
     def get_opened_status(self):
         return self.opened
 
+    def get_date_hour(self):
+        return self.date.strftime("%x %X")
+
+    def get_hour(self):
+        return self.date.strftime("%X")
 
 @login.user_loader
 def load_user(id):
