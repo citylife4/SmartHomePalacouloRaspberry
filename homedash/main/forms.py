@@ -10,6 +10,9 @@ from homedash.models import User
 
 
 class DateForm(FlaskForm):
-    dt = DateField('Escolhe uma data Ex: 2018-06-15 ', format='%Y-%m-%d', id="datepicker", render_kw={'autocomplete':'off'})
+    dt = DateField('Escolhe uma data Ex: 2018-06-15 ',
+                   format='%Y-%m-%d',
+                   id="datepicker",
+                   render_kw={'autocomplete':'off'})
 
     submit = SubmitField('Go')
