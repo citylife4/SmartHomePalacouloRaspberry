@@ -62,10 +62,8 @@ class User(db.Model):
         self.password = bcrypt.generate_password_hash(password)
     # Todo : add possibility to admins to create and delete users on site
 
-
     def verify_reset_password_token(self):
         return User.query.get(self.id)
-
 
     def __repr__(self):
         return '<User %r>' % self.username
@@ -160,8 +158,7 @@ class Pagination(object):
         last = 0
         for num in xrange(1, self.pages + 1):
             if num <= left_edge or \
-               (num > self.page - left_current - 1 and \
-                num < self.page + right_current) or \
+               (self.page - left_current - 1 < num < self.page + right_current) or \
                num > self.pages - right_edge:
                 if last + 1 != num:
                     yield None

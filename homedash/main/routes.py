@@ -71,8 +71,8 @@ def change_garage_door():
         if door_status == 4:
             door_status = 0
 
-    new_door_stuts = PalacouloDoorStatus(date=datetime.now(), door_status=door_status)
-    db.session.add(new_door_stuts)
+    new_door_status = PalacouloDoorStatus(date=datetime.now(), door_status=door_status)
+    db.session.add(new_door_status)
     db.session.commit()
     return redirect(url_for('homedash.overview'))
 
@@ -91,9 +91,9 @@ def porto_overview(location):
         if row.date.strftime('%x') in submit_date:
             value = 1
 
-    print(submit_date)
-    print(location)
-    print(door_status)
+    #print(submit_date)
+    #print(location)
+    #print(door_status)
 
     if not door_status:
         print("Problems")
