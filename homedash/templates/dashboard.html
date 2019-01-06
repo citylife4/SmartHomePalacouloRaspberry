@@ -1,42 +1,12 @@
 {% extends "main.html" %}
-{% block content %}
+{% block pageinner %}
 
 
-        <div id="loading"></div>
-        <div id="row" class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                        Palacoulo
-                </div>
-                    <div class="card-body">
-                        {% if status == 0 %}
-                            <p> Porta está <span style="color: red; ">Fachada</span>  </p>
-                            <a href={{ url_for('homedash.change_garage_door') }} class="btn btn-primary" >Abrir</a>
-                        {% elif status == 1 %}
-                            <p> Porta está <span style="color: orange; ">A Abrir</span> </p>
-                            <a href={{ url_for('homedash.change_garage_door') }} class="btn btn-primary" >Fechar</a>
-                            <p> distance : {{ distance }}</p>
-                        {% elif status == 2 %}
-                            <p> Porta está <span style="color: green; ">Aberta</span> </p>
-                            <a href={{ url_for('homedash.change_garage_door') }} class="btn btn-primary" >Fechar</a>
-                        {% elif status == 3 %}
-                            <p> Porta está <span style="color: orange; ">A fechar</span> </p>
-                            <a href={{ url_for('homedash.change_garage_door') }} class="btn btn-primary" >Abrir</a>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        <div id="row" class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    Abertura de Porta Porto
-                </div>
-                <div class="card-body">
-                    <a href={{ url_for('homedash.open_porto_door') }} class="btn btn-primary" >Abrir</a>
-                </div>
-            </div>
-        </div>
-
+    <div id="loading"></div>
+    {% include 'cards/palacoulo_garage_door_opener.html' %}
+    {% include 'cards/porto_door_opener.html' %}
+    {% include 'cards/boken_graph.html' %}
+    {% include 'cards/temperature_pi_gauge.html' %}
 
     <script type="text/javascript">// <![CDATA[
     $('a').click(function () {

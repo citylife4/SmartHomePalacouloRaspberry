@@ -21,9 +21,20 @@
 </head>
 
 <body class="text-center">
+
     <div class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal">{{ _('Sign In') }}</h1>
         {{ wtf.quick_form(form) }}
+    <hr>
+                {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
     </div>
 
 </body>

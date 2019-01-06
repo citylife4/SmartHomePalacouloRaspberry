@@ -89,9 +89,9 @@ def create_homedash_app(config_class=Config):
                 '[in %(pathname)s:%(lineno)d]'))
             file_handler.setLevel(logging.INFO)
             homedash.logger.addHandler(file_handler)
-
+        homedash.config['TEMPLATES_AUTO_RELOAD'] = True
         homedash.logger.setLevel(logging.INFO)
-        homedash.logger.info('Microblog startup')
+        homedash.logger.info('Jdvalverde website startup')
 
     return homedash
 

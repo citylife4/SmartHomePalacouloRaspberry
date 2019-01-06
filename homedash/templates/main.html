@@ -6,13 +6,36 @@
     <title>Palaçoulo Dashboard</title>
 
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <!-- Bokeh includes-->
+    <script type="text/javascript" src={{ url_for('static', filename='js/bokeh-1.0.2.min.js') }} ></script> <!-- v4.1.1 -->
 
     <!-- StyleSheets -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome-all.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/custom-styles.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bokeh-1.0.2.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/open_sans.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for('static', filename='jquery/jquery-ui.css') }}"> <!-- 1.21.1 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='jquery/jquery-ui.css') }}" type="text/css"> <!-- 1.21.1 -->
+
+    <script src={{ url_for('static', filename='js/gauge.min.js') }}></script> <!-- v4.1.1 -->
+    <script src={{ url_for('static', filename='js/gauge.page.js') }}></script> <!-- v4.1.1 -->
+
+    {#  comment #}
+    <!-- jQuery Js -->
+    <script src={{ url_for('static', filename='jquery/jquery-1.12.4.js') }}></script>
+    <script src={{ url_for('static', filename='jquery/jquery-ui.js') }}></script> <!-- ui/1.12.1 -->
+    <!-- JS Scripts-->
+    <script src={{ url_for('static', filename='js/popper.min.js') }}></script> <!-- ajax/libs/popper.js/1.14.3/umd -->
+    <script src={{ url_for('static', filename='js/bootstrap.min.js') }}></script> <!-- v4.1.1 -->
+    {# endcomment #}
+
+
+    <!-- Custom Js -->
+    <script>
+        $(function () {
+            $("#datepicker").datepicker({dateFormat: 'yy-mm-dd'});
+        });
+    </script>
 
 </head>
 <body>
@@ -26,10 +49,16 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('homedash.porto_overview',location='porto') }}">Porto<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ url_for('homedash.porto_overview',location='porto') }}">Porto<span
+                            class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('homedash.porto_overview',location='palacoulo') }}">Palaçoulo</a>
+                    <a class="nav-link"
+                       href="{{ url_for('homedash.porto_overview',location='palacoulo') }}">Palaçoulo</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('homedash.porto_overview',location='porto') }}"><span
+                            class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <ul class="navbar-nav my-2 my-md-0">
@@ -50,28 +79,19 @@
         </div>
     </nav>
 </header>
+
+
 <!-- /. NAV SIDE  -->
-<main id="page-wrapper" class="col-md-10 col-xs-12 ml-sm-auto col-lg-10 pt-3 px-4">
-    <div id="page-inner"
-         class="d-flex flex-wrap flex-md-nowrap pb-2 mb-3 border-bottom">  <!-- justify-content-between -->
-        {% block content %}{% endblock %}
+<!--  <main id="page-wrapper" class="col-md-10 col-xs-12 col-lg-10 pt-3 px-4"> -->
+<!--  <div id="page-inner"
+      class="d-flex flex-wrap flex-md-nowrap pb-2 mb-3 border-bottom">   --> <!-- justify-content-between -->
+<main id="page-wrapper" class="col-md-12">
+    <div id="page-inner" class="justify-content-center row d-flex align-items-center h-100">
+        {% block pageinner %}{% endblock %}
     </div>
     <!-- /. PAGE INNER  -->
 </main>
 
-
-<!-- JS Scripts-->
-<script src={{ url_for('static', filename='js/popper.min.js') }}></script> <!-- ajax/libs/popper.js/1.14.3/umd -->
-<script src={{ url_for('static', filename='js/bootstrap.min.js') }}></script> <!-- v4.1.1 -->
-<!-- jQuery Js -->
-<script src={{ url_for('static', filename='jquery/jquery-1.12.4.js') }}></script>
-<script src={{ url_for('static', filename='jquery/jquery-ui.js') }}></script> <!-- ui/1.12.1 -->
-<!-- Custom Js -->
-<script>
-    $( function() {
-        $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
-    } );
-</script>
 
 </body>
 

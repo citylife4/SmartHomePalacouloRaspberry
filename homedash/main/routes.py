@@ -1,15 +1,24 @@
 import socket
+
 from datetime import datetime
 
-from flask import url_for, redirect, render_template, request
+from flask import url_for, redirect, render_template, request, jsonify
+from flask_login import login_required
 
 from config import Config
+
 from homedash import db
 from homedash.main import blueprint
-from homedash.models import PortoDoorStatus, PalacouloDoorStatus, count_all_door_status_tables, count_door_status_in_date
+from homedash.models import PortoDoorStatus, PalacouloDoorStatus
 from homedash.socket_connection.protocol import send_open
 from homedash.main.forms import DateForm
-from flask_login import login_required
+from homedash.main.pi_utils import measure_temp
+
+
+
+from bokeh.plotting import figure
+from bokeh.embed import components
+from bokeh.models.sources import AjaxDataSource
 
 
 @blueprint.route('/', methods=['GET', 'POST'])
@@ -24,7 +33,11 @@ def index():
 @login_required
 def overview():
     door = PalacouloDoorStatus.query.order_by(PalacouloDoorStatus.id.desc()).first()
-    return render_template('dashboard.html', status=door.door_status, curr=1)
+    plots = [make_ajax_plot()]
+    return render_template('dashboard.html',
+                           plots=plots,
+                           status=door.door_status,
+                           curr=1)
 
 
 @blueprint.route('/dashboard/history')
@@ -76,6 +89,20 @@ def change_garage_door():
     db.session.commit()
     return redirect(url_for('homedash.overview'))
 
+@blueprint.route('/dashboard/util/graph_temperature/', methods=['POST'])
+@login_required
+def graph_temperature():
+    #TODO: Check how to fix below code
+    x = datetime.now().strftime("%S")
+    y = measure_temp()
+    return jsonify(x=[x], y=[y])
+
+@blueprint.route('/dashboard/util/gauge_temperature/', methods=['POST'])
+@login_required
+def gauge_temperature():
+    #TODO: Check how to fix below code
+    temp = measure_temp()
+    return jsonify(temp=[temp])
 
 @blueprint.route('/dashboard/<location>/date/', methods=['GET', 'POST'])
 @login_required
@@ -86,6 +113,9 @@ def porto_overview(location):
 
     submit_date = form.dt.data.strftime('%x') if form.validate_on_submit() else datetime.now().strftime('%x')
     door_status = PalacouloDoorStatus.query.all() if "palacoulo" in location else PortoDoorStatus.query.all()
+    door = PalacouloDoorStatus.query.order_by(PalacouloDoorStatus.id.desc()).first()
+    plots = [make_plot()]
+    print(plots)
 
     for row in door_status:
         if row.date.strftime('%x') in submit_date:
@@ -101,8 +131,36 @@ def porto_overview(location):
 
     #pagination = Pagination(date, Config.PER_PAGE, count)
     return render_template('table_date_overview.html' ,
+                           status=door.door_status,
                            type=location,
                            form=form,
                            submit_date=submit_date,
                            door_table=door_status,
-                           value=value)
+                           value=value,
+                           plots=plots)
+
+def make_plot():
+    plot = figure(plot_height=300, sizing_mode='scale_width')
+
+    x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    y = [2**v for v in x]
+
+    plot.line(x, y, line_width=4)
+
+    script, div = components(plot)
+    return script, div
+
+def make_ajax_plot():
+    source = AjaxDataSource(
+        data_url=request.url_root + 'dashboard/util/graph_temperature/',
+        polling_interval=2000,
+        mode='append'
+    )
+
+    source.data = dict(x=[], y=[])
+
+    plot = figure(x_axis_type='datetime', plot_height=300, sizing_mode='scale_width')
+    plot.line('x', 'y', source=source, line_width=4)
+
+    script, div = components(plot)
+    return script, div

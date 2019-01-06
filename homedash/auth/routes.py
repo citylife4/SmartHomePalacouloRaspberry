@@ -3,7 +3,7 @@ from flask_babel import _
 from flask_login import login_user, logout_user, current_user
 from werkzeug.urls import url_parse
 
-from homedash import db
+from homedash import db, bcrypt
 from homedash.auth import blueprint
 from homedash.auth.forms import LoginForm, RegistrationForm, \
     ResetPasswordRequestForm, ResetPasswordForm
@@ -18,12 +18,11 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('homedash.index'))
     form = LoginForm()
-    print(form.password.data)
-    print(form.validate_on_submit())
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
 
         if user is None or not user.check_password(form.password.data):
+            print("Invalid username or password")
             flash(_('Invalid username or password'))
             return redirect(url_for('auth.login'))
         login_user(user, remember=form.remember_me.data)
