@@ -1,7 +1,6 @@
+<div class="card-header">{{ type +" em " + submit_date }}</div>
 
-    <div class="card-header">{{ type +" em " + submit_date }}</div>
-
-    {#
+{#
                     <form method="post" action="{{ url_for('homedash.porto_overview',location=type) }}">
                         {{ form.hidden_tag() }}
                         {{ form.dt(class="date") }}
@@ -18,6 +17,12 @@
                         {% include 'cards/_'+type+'_door_status.html' %}
                     {% endif %}
                 {% endfor %}
+                {% if prev_url %}
+                    <a href="{{ prev_url }}"> Trás </a>
+                {% endif %}
+                {% if next_url %}
+                    <a href="{{ next_url }}"> Frente </a>
+                {% endif %}
             {% else %}
                 <p>&mdash;Não há informações disponíveis para esta data&mdash;</p>
             {% endif %}

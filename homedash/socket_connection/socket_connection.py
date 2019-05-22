@@ -2,6 +2,28 @@ import socket
 import time
 
 
+class SocketConnection:
+
+    def __init__(self,address,port):
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.address_client=(address,port)
+
+    def connect(self):
+        self.sock.connect(self.address_client)
+
+    def send_msg(self,message):
+        self.connect()
+        try:
+            self.sock.sendall(message.encode('utf-8'))
+            print('Sending %s ' % message)
+            receive_data = self.sock.recv(1024).decode()
+            print('Received %s ' % receive_data)
+        finally:
+            self.sock.close()
+
+
+
 def send_socket(message):
     #global connected
 
@@ -41,3 +63,4 @@ def send_socket(message):
     finally:
         sock_send.close()
         return receive_data
+

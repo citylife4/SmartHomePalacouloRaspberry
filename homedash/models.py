@@ -71,7 +71,7 @@ class User(db.Model):
 
 
 class PalacouloDoorStatus(db.Model):
-    __tablename__ = "door_palacoulo"
+    __tablename__ = "palacoulo_garage_door"
 
     id = db.Column('id', db.Integer, primary_key=True)
     date = db.Column('date', db.DATETIME, index=True)
