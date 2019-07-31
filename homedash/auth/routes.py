@@ -1,15 +1,16 @@
 from flask import render_template, redirect, url_for, flash, request
 from flask_babel import _
-from flask_login import login_user, logout_user, current_user
+from flask_login import current_user, login_required
+from flask_login import login_user, logout_user
 from werkzeug.urls import url_parse
 
-from homedash import db, bcrypt
+from homedash import db
 from homedash.auth import blueprint
 from homedash.auth.forms import LoginForm, RegistrationForm, \
     ResetPasswordRequestForm, ResetPasswordForm
 from homedash.models import User
 
-from flask_login import current_user, login_required
+
 #from homedash.auth.email import send_password_reset_email
 
 

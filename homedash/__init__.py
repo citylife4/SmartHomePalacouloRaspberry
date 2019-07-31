@@ -2,12 +2,12 @@ import logging
 import os
 from logging.handlers import SMTPHandler, RotatingFileHandler
 
-from flask import Flask, request
+from flask import Flask
+# from flask_moment import Moment
+from flask_babel import Babel, lazy_gettext as _l
 from flask_bcrypt import Bcrypt
 # from flask_mail import Mail
 from flask_bootstrap import Bootstrap
-# from flask_moment import Moment
-from flask_babel import Babel, lazy_gettext as _l
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy

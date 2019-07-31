@@ -1,7 +1,3 @@
-from time import sleep
-
-import threading
-from homedash.socket_connection.socket_connection import send_socket
 import threading
 from time import sleep
 

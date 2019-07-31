@@ -1,24 +1,20 @@
-from datetime import datetime
 from datetime import date
+from datetime import datetime
 
+from bokeh.embed import components
+from bokeh.models.sources import AjaxDataSource
+from bokeh.plotting import figure
 from flask import url_for, redirect, render_template, request, jsonify
 from flask_login import login_required
-
 from sqlalchemy import func
 
 from config import Config
-
 from homedash import db
 from homedash.main import blueprint
-from homedash.models import PortoDoorStatus, PalacouloDoorStatus
-from homedash.socket_connection.protocol import send_open
 from homedash.main.forms import DateForm
 from homedash.main.pi_utils import measure_temp
-
-from bokeh.plotting import figure
-from bokeh.embed import components
-from bokeh.models.sources import AjaxDataSource
-
+from homedash.models import PortoDoorStatus, PalacouloDoorStatus
+from homedash.socket_connection.protocol import send_open
 from homedash.socket_connection.socket_connection import SocketConnection
 
 
