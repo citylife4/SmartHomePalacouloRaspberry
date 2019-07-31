@@ -1,5 +1,3 @@
-import socket
-
 from datetime import datetime
 from datetime import date
 
@@ -17,11 +15,11 @@ from homedash.socket_connection.protocol import send_open
 from homedash.main.forms import DateForm
 from homedash.main.pi_utils import measure_temp
 
-
-
 from bokeh.plotting import figure
 from bokeh.embed import components
 from bokeh.models.sources import AjaxDataSource
+
+from homedash.socket_connection.socket_connection import SocketConnection
 
 
 @blueprint.route('/', methods=['GET', 'POST'])
@@ -53,10 +51,8 @@ def history():
 @login_required
 def open_porto_door():
 
-    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client.connect((Config.INTERNAL_SERVER, Config.INTERNAL_PORT))
-    client.sendall(bytes("This is from Client", 'UTF-8'))
-    client.close()
+    client = SocketConnection(Config.INTERNAL_SERVER, Config.INTERNAL_PORT)
+    client.send_msg("op_1")
 
     #ser = serial.Serial('/dev/ttyAMA0', 9600, timeout = 1)
     #ser.write(b'1')
@@ -124,10 +120,10 @@ def porto_overview(location):
     get_date = request.args.get('submit_date', type=str)
     today_string = datetime.now().strftime('%x')
 
-    print("GET:")
-    print(get_date)
-    print("Today:")
-    print(today_string)
+    #print("GET:")
+    #print(get_date)
+    #print("Today:")
+    #print(today_string)
 
     if get_date:
         submit_date   = datetime.strptime(get_date, '%Y-%m-%d').strftime('%x')
@@ -136,8 +132,8 @@ def porto_overview(location):
         submit_date   = form.dt.data.strftime('%x') if form.validate_on_submit() else date.today().strftime('%x')
         submit_date_u = form.dt.data                if form.validate_on_submit() else date.today()
 
-    print(submit_date_u)
-    print(submit_date)
+    #print(submit_date_u)
+    #print(submit_date)
 
 
     door_status = \
@@ -153,10 +149,10 @@ def porto_overview(location):
         print("Problems")
         #abort(404)
 
-    print(door_status.items)
+    #print(door_status.items)
     for row in door_status.items:
         if row.date.strftime('%x') == submit_date:
-            print("1")
+    #        print("1")
             value = 1
 
 
@@ -176,6 +172,9 @@ def porto_overview(location):
                            plots=plots,
                            next_url = next_url,
                            prev_url = prev_url)
+
+
+#Usefull funtions
 
 def make_plot():
     plot = figure(plot_height=300, sizing_mode='scale_width')

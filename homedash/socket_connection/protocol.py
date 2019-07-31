@@ -10,7 +10,7 @@ from homedash.socket_connection.socket_connection import send_socket
 
 def send_open():
     global q
-    to_do = "open"
+    to_do = "tr_open"
 
     if 'q' in globals():
         print(q.isAlive())

@@ -58,8 +58,15 @@ def send_socket(message):
 
     try:
         sock_send.sendall(message.encode('utf-8'))
-        receive_data = sock_send.recv(1024).decode()
-        print('Received %s ' % receive_data)
+
+        amount_received = 0
+        amount_expected = len(message)
+
+        while amount_received < amount_expected:
+            receive_data = sock_send.recv(16).decode()
+            amount_received += len(receive_data)
+            print("received {!r}".format(receive_data))
+
     finally:
         sock_send.close()
         return receive_data
