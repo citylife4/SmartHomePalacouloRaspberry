@@ -53,7 +53,7 @@ pycparser==2.19
 pycrypto==2.6.1
 pygobject==3.22.0
 pyinotify==0.9.6
-pyOpenSSL==16.2.0
+pyOpenSSL==17.5.0
 pyparsing==2.1.10
 pyRFC3339==1.0
 pyserial==3.4
