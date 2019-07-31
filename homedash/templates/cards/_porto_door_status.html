@@ -1,11 +1,11 @@
 
 <tr>
      <td class="title">{{ door.get_hour() }}</td>
-    {% if door.get_opened_status() == 0 %}
+    {% if door.get_opened_status() == 'opening_remotaly' %}
             <td class="title">Controlado Remotamente</td>
-    {% elif door.get_opened_status() == 1 %}
+    {% elif door.get_opened_status() == 'opening_manualy' %}
             <td class="title">Campainha</td>
-    {% elif door.get_opened_status() == 3 %}
+    {% elif door.get_opened_status() == 'door_open' %}
              <td class="title">Porta 3 andar Aberta</td>
     {% endif %}
 
