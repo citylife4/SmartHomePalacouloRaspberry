@@ -1,4 +1,14 @@
-Casa Palacoulo
+## Smart Home Valverde
+<small>Wow, three build trackers (just because I can):</small>  
+[![Travis-ci Build Status](https://travis-ci.org/citylife4/SmartHome_PortoWeb.svg?branch=master](https://travis-ci.org/citylife4/SmartHome_PortoWeb.svg?branch=master)
+
+### References
+* Turorial [Flask mega tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)
+* [Remote debug on rpi](https://nathanpjones.com/2016/02/remote-debug-gpio-on-raspberry-pi/)  
+
+
+<p>
+
 
 TODO: -Change port (for now there is no need)
       -Maybe login interface:
@@ -19,4 +29,8 @@ References:
    TODO:
    -Settings]
 
-   -Save door information
+   -Save door information</p>
+
+
+
+
