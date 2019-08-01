@@ -1,3 +1,5 @@
+https://travis-ci.org/citylife4/SmartHome_PortoWeb.svg?branch=master
+
 Casa Palacoulo
 
 TODO: -Change port (for now there is no need)
