@@ -76,15 +76,15 @@ def change_garage_door():
     print("Ola")
     door_status = door.door_status
 
-    if door_status is 0:
+    if door_status == 0:
         print("Opening")
         send_open()
-    elif door_status is 1:
+    elif door_status == 1:
         print("Still Opening")
-    elif door_status is 2:
+    elif door_status == 2:
         print("Closing")
         send_open()
-    elif door_status is 3:
+    elif door_status == 3:
         print("Still closing")
 
     if DEBUG:
