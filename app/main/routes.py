@@ -1,3 +1,7 @@
+import time
+
+import threading
+
 from datetime import date
 from datetime import datetime
 
@@ -44,12 +48,19 @@ def history():
     return render_template('construction.html')
 
 
+def open_worker():
+    client = SocketConnection(Config.INTERNAL_SERVER, Config.INTERNAL_PORT)
+    #client.send_msg("op_<0_1_2_2_0>")
+    client.send_msg("op_<0_1_0_2_1>")
+    time.sleep(4)
+    client.send_msg("op_<0_1_0_2_0>")
+
 @blueprint.route('/dashboard/control/open_porto_door')
 @login_required
 def open_porto_door():
 
-    client = SocketConnection(Config.INTERNAL_SERVER, Config.INTERNAL_PORT)
-    client.send_msg("op_1")
+    t = threading.Thread(target=open_worker)
+    t.start()
 
     #ser = serial.Serial('/dev/ttyAMA0', 9600, timeout = 1)
     #ser.write(b'1')
@@ -115,7 +126,6 @@ def porto_overview(location):
     form = DateForm()
     page = request.args.get('page', 1, type=int)
     get_date = request.args.get('submit_date', type=str)
-    today_string = datetime.now().strftime('%x')
 
     #print("GET:")
     #print(get_date)

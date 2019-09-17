@@ -3,44 +3,46 @@ import socket
 
 class SocketConnection:
 
-    def __init__(self,address,port):
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.address_client=(address,port)
+    def __init__(self, address, port):
+        self.address_client = (address, port)
+        self.sock = None
 
     def connect(self):
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.sock.connect(self.address_client)
 
-    def send_msg(self,message):
-        self.connect()
-        try:
-            self.sock.sendall(message.encode('utf-8'))
-            print('Sending %s ' % message)
-            receive_data = self.sock.recv(1024).decode()
-            print('Received %s ' % receive_data)
-        finally:
-            self.sock.close()
+    def close(self):
+        self.sock.close()
+        self.sock=None
 
+    def send_msg(self, message):
+        self.connect()
+        self.sock.sendall(message.encode('utf-8'))
+        print('Sending %s ' % message)
+        receive_data = self.sock.recv(1024).decode()
+        print('Received %s ' % receive_data)
+        self.close()
 
 
 def send_socket(message):
-    #global connected
+    # global connected
 
     # time.sleep(random.randrange(2, 5))  # Sleeps for some time.
-    #logging.info('Aquiring lock')
+    # logging.info('Aquiring lock')
     # condition.acquire()
-    #logging.info('Waiting for connection %s' % connected)
+    # logging.info('Waiting for connection %s' % connected)
 
     # TODO: check how to make with conditions....
-    #while not connected:
+    # while not connected:
     #    time.sleep(10)
 
-    #with condition:
+    # with condition:
     #    condition.wait_for(connected)
 
-    #logging.info('Connected %s' % connected)
-    #now check if there is someting to send
-    #if connected:
+    # logging.info('Connected %s' % connected)
+    # now check if there is someting to send
+    # if connected:
 
     sock_send = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock_send.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -69,4 +71,3 @@ def send_socket(message):
     finally:
         sock_send.close()
         return receive_data
-
