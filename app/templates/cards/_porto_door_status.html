@@ -4,7 +4,9 @@
     {% if door.get_opened_status() == 'opening_remotaly' %}
             <td class="title">Controlado Remotamente</td>
     {% elif door.get_opened_status() == 'opening_manualy' %}
-            <td class="title">Campainha</td>
+            <td class="title">Aberto com Campainha</td>
+    {% elif door.get_opened_status() == 'door_belt' %}
+            <td class="title">Tocou Campainha</td>
     {% elif door.get_opened_status() == 'door_open' %}
              <td class="title">Porta 3 andar Aberta</td>
     {% endif %}

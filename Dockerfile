@@ -42,4 +42,5 @@ RUN chown -R homedash:homedash ./
 USER homedash
 
 EXPOSE 5000
+EXPOSE 45321
 ENTRYPOINT ["./boot.sh"]
