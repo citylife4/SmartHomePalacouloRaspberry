@@ -9,6 +9,8 @@
             <td class="title">Tocou Campainha</td>
     {% elif door.get_opened_status() == 'door_open' %}
              <td class="title">Porta 3 andar Aberta</td>
+    {% else %}
+        <td class="title"> {{ door.get_opened_status() }} </td>
     {% endif %}
 
 </tr>
