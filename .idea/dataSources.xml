@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="database" uuid="1644f834-4202-446b-8863-b901d0999919">
+    <data-source source="LOCAL" name="database" uuid="2b2dd7a4-322a-420f-8390-c8c15725e8ea">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/app/Database/database.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:E:\Programming\SmartHome_PortoWeb\app\Database\database.db</jdbc-url>
       <driver-properties>
         <property name="enable_load_extension" value="true" />
       </driver-properties>
