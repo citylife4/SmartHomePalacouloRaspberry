@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="Flask">
+    <option name="enabled" value="true" />
+  </component>
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/app/auth" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/app/Database" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/app/main" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/app/socket_connection" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/app/util" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="SmartHome Venv" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="R User Library" level="project" />
+    <orderEntry type="library" name="R Skeletons" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="popper" level="application" />
+    <orderEntry type="library" name="jquery-3.3.1.slim" level="application" />
+    <orderEntry type="module" module-name="smarthome_transmiter" />
+    <orderEntry type="library" name="jquery-1.12.4" level="application" />
+    <orderEntry type="library" name="jquery-ui" level="application" />
+    <orderEntry type="library" name="gauge" level="application" />
+    <orderEntry type="library" name="bokeh-1.0.2" level="application" />
+    <orderEntry type="module" module-name="SmartHome_Transmiter" />
+    <orderEntry type="module" module-name="SmartHome_Transmiter" />
+  </component>
+  <component name="TemplatesService">
+    <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
+  </component>
+  <component name="TestRunnerService">
+    <option name="PROJECT_TEST_RUNNER" value="Unittests" />
+  </component>
+</module>
