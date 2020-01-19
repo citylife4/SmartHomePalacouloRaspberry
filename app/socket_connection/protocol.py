@@ -14,6 +14,7 @@ def send_open():
             print("Sleeping")
             sleep(5)
 
+    print
     download_thread = threading.Thread(target=send_socket, args=(to_do,) )
     download_thread.start()
     q = download_thread

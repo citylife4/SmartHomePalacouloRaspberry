@@ -5,6 +5,7 @@
       <list>
         <remote-mappings server-id="python@sftp://jdv@192.168.1.10:22/usr/bin/python3" />
         <remote-mappings server-id="python@sftp://jdv@192.168.1.10:22/home/jdv/Project/smarthome_venv/bin/python3" />
+        <remote-mappings server-id="python@e1a12b95-80ed-4426-bb56-6431b471267a" />
       </list>
     </list>
   </component>

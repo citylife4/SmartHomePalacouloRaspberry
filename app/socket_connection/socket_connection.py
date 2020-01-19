@@ -48,11 +48,12 @@ def send_socket(message):
     sock_send.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
     # Connect the socket_connection to the port where the server is listening
-    ip_file = open("/home/jdv/ip_file.txt", "r+")
-    client_address = ip_file.read()
-    ip_file.close()
+    # ip_file = open("/home/jdv/ip_file.txt", "r+")
+    # client_address = ip_file.read()
+    # ip_file.close()
 
-    server_address = (client_address, 45321)
+    # TODO Change this
+    server_address = ("dvpalacoulo.dynip.sapo.pt", 45321)
     print('Connecting Raspberry to %s on %s' % server_address)
     sock_send.connect(server_address)
     receive_data = None
@@ -66,7 +67,7 @@ def send_socket(message):
         while amount_received < amount_expected:
             receive_data = sock_send.recv(16).decode()
             amount_received += len(receive_data)
-            print("received {!r}".format(receive_data))
+        print("received {!r}".format(receive_data))
 
     finally:
         sock_send.close()

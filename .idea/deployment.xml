@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="Porto Raspberry" compareModeInSync="TEXT">
+  <component name="PublishConfigData" autoUpload="Always" serverName="Palacoulo Raspberry" autoUploadExternalChanges="true" compareModeInSync="TEXT">
     <serverData>
+      <paths name="Palacoulo Raspberry">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/jdv/programs/palacoulo_smart" local="$PROJECT_DIR$/../palacoulo_smart" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="Porto Raspberry">
         <serverdata>
           <mappings>
             <mapping deploy="/projects/website/SmartHome_PortoWeb" local="$PROJECT_DIR$" web="/" />
-            <mapping deploy="/projects/website/SmartHome_PortoTransmitter" local="$PROJECT_DIR$/../SmartHome_PortoTransmitter" web="/" />
+            <mapping deploy="/projects/website/SmartHome_PortoTransmitter" local="$PROJECT_DIR$/../SmartHome_Transmitter" web="/" />
           </mappings>
         </serverdata>
       </paths>

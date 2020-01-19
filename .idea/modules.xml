@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/SmartHome_PortoWeb.iml" filepath="$PROJECT_DIR$/.idea/SmartHome_PortoWeb.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../SmartHome_PortoTransmitter/.idea/SmartHome_Transmiter.iml" filepath="$PROJECT_DIR$/../SmartHome_PortoTransmitter/.idea/SmartHome_Transmiter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../SmartHome_Transmitter/.idea/SmartHome_Transmiter.iml" filepath="$PROJECT_DIR$/../SmartHome_Transmitter/.idea/SmartHome_Transmiter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../palacoulo_smart/.idea/palacoulo_smart.iml" filepath="$PROJECT_DIR$/../palacoulo_smart/.idea/palacoulo_smart.iml" />
     </modules>
   </component>
 </project>
