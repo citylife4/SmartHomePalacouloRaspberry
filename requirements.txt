@@ -23,7 +23,7 @@ Mako==1.1.1
 MarkupSafe==1.1.1
 more-itertools==7.2.0
 numpy==1.17.2
-packaging==19.2
+packaging==20.1
 pathlib2==2.3.4
 Pillow==6.2.0
 pluggy==0.13.1
