@@ -6,7 +6,7 @@ bcrypt==3.1.7
 bokeh==1.4.0
 cffi==1.12.3
 Click==7.0
-coverage==4.5.4
+coverage==5.0.3
 dominate==2.4.0
 Flask==1.1.1
 Flask-Babel==0.12.2
