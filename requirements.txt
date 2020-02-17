@@ -24,7 +24,7 @@ MarkupSafe==1.1.1
 more-itertools==8.2.0
 numpy==1.17.2
 packaging==20.1
-pathlib2==2.3.4
+pathlib2==2.3.5
 Pillow==6.2.0
 pluggy==0.13.1
 py==1.8.0
