@@ -15,6 +15,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="SmartHome_Transmiter" />
     <orderEntry type="module" module-name="palacoulo_smart" />
+    <orderEntry type="module" module-name="SmartHome_Transmiter" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />

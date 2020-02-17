@@ -5,15 +5,15 @@
       <paths name="Palacoulo Raspberry">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/jdv/programs/palacoulo_smart" local="$PROJECT_DIR$/../palacoulo_smart" />
+            <mapping deploy="/projects/SmartHome_Palacoulo" local="$PROJECT_DIR$/../SmartHome_Palacoulo" web="/" />
           </mappings>
         </serverdata>
       </paths>
-      <paths name="Porto Raspberry">
+      <paths name="Porto Raspberrty">
         <serverdata>
           <mappings>
             <mapping deploy="/projects/website/SmartHome_PortoWeb" local="$PROJECT_DIR$" web="/" />
-            <mapping deploy="/projects/website/SmartHome_PortoTransmitter" local="$PROJECT_DIR$/../SmartHome_Transmitter" web="/" />
+            <mapping deploy="/projects/website/SmartHome_PortoTransmitter" local="$PROJECT_DIR$/../SmartHome_PortoTransmitter" web="/" />
           </mappings>
         </serverdata>
       </paths>
