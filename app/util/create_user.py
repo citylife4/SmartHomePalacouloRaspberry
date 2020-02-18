@@ -1,7 +1,8 @@
 import sys
+import os
 
-sys.path.insert(0, '/home/jdv/Project/SmartHome_Webserver/')
-sys.path.insert(0, '/home/jdv/Project/SmartHome_Webserver/app')
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
+
 
 from config import Config
 from app import create_homedash_app
