@@ -30,10 +30,10 @@ def index():
 @blueprint.route('/dashboard/overview')
 @login_required
 def overview():
-    # TODO: error if nothing on the Database
     door = PalacouloDoorStatus.query.order_by(PalacouloDoorStatus.id.desc()).first()
+
     return render_template('dashboard.html',
-                           status=door.door_status,
+                           status=door,
                            curr=1)
 
 
@@ -148,7 +148,7 @@ def porto_overview(location):
 
     # pagination = Pagination(date, Config.PER_PAGE, count)
     return render_template('table_date_overview.html',
-                           status=door.door_status,
+                           status=door,
                            value=value,
                            type=location,
                            form=form,
